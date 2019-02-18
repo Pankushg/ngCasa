@@ -1,0 +1,10 @@
+<div class="container">
+  <h3>
+      Login
+  </h3>
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <label for="phone">Enter Phone Number</label>
+      <input type="text" formControlName="phone"> <br>
+      <button type="submit" class="button-primary">Submit</button>
+  </form>
+</div>
