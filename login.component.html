@@ -4,7 +4,26 @@
   </h3>
   <form [formGroup]="loginForm" (ngSubmit)="login()">
       <label for="phone">Enter Phone Number</label>
-      <input type="text" formControlName="phone"> <br>
-      <button type="submit" class="button-primary">Submit</button>
+      <input type="text" formControlName="phone">
+      <div *ngIf="loginForm.invalid && (loginForm.touched || loginForm.dirty); else test ">
+        <div style="color: red" *ngIf="loginForm.invalid 
+        && loginForm.get('phone').errors.required 
+        && (loginForm.get('phone').touched || loginForm.get('phone').dirty)">
+          Phone number required!!
+        </div>
+        <div style="color: red" *ngIf="loginForm.invalid 
+        && (loginForm.get('phone').errors.minlength || loginForm.get('phone').errors.maxlength || loginForm.get('phone').errors.pattern)  
+        && (loginForm.get('phone').touched || loginForm.get('phone').dirty)">
+          Invalid 10-digit number!!
+        </div>
+      </div>
+      <ng-template #test>
+        <div>
+          <br>
+        </div>  
+      </ng-template>
+      <button type="submit" class="button-primary">
+        Submit
+      </button>
   </form>
 </div>
