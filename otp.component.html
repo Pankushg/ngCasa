@@ -1,0 +1,30 @@
+<h3>
+    Verify
+</h3>
+<form [formGroup]="otpForm" (ngSubmit)="login()">
+  <label for="otp">Msg sent to {{phone}}</label>
+  <input type="text" formControlName="otp" placeholder="Enter Otp">
+  <div *ngIf="otpForm.invalid && (otpForm.touched || otpForm.dirty); else test ">
+    <div style="color: red" *ngIf="otpForm.invalid 
+    && otpForm.get('otp').errors.required 
+    && (otpForm.get('otp').touched || otpForm.get('otp').dirty)">
+      Phone number required!!
+    </div>
+    <div style="color: red" *ngIf="otpForm.invalid 
+    && (otpForm.get('otp').errors.minlength || otpForm.get('otp').errors.maxlength || otpForm.get('otp').errors.pattern)  
+    && (otpForm.get('otp').touched || otpForm.get('otp').dirty)">
+      Invalid 10-digit number!!
+    </div>
+  </div>
+  <ng-template #test>
+    <div>
+      <br>
+    </div>  
+  </ng-template>
+  <button type="submit" class="button-primary" [disabled]="!otpForm.valid">
+    Submit
+  </button> <br>
+  <a (click)="submit()">Resend</a>
+</form>
+
+  
